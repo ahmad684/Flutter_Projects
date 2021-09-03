@@ -29,7 +29,11 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
+        theme: ThemeData(
 
+            primaryColor: Color(0xff145c9E),
+            scaffoldBackgroundColor: Color(0xff1F1F1f)
+        ),
       home:SplashScreen()
     );
   }

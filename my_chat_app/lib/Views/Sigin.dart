@@ -206,7 +206,7 @@ late QuerySnapshot _querySnapshot;
         SharedPrefrencesData.setMyEmail(_email.text);
         _saveData.getUserByEmail(_email.text).then((val){
           _querySnapshot=val;
-          SharedPrefrencesData.setMyEmail(_querySnapshot.docs[0]["Name"]);
+          SharedPrefrencesData.setMyName(_querySnapshot.docs[0]["Name"]);
 
         });
 

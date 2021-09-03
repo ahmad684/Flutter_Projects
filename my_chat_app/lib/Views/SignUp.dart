@@ -1,8 +1,12 @@
+
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_chat_app/Views/Sigin.dart';
 import 'package:my_chat_app/Views/conversation.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:my_chat_app/authentication1/Sharedpref.dart';
 import 'package:my_chat_app/authentication1/UserInfo.dart';
 import 'package:my_chat_app/widget/apBar.dart';
@@ -15,12 +19,34 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  late FileImage _fileImage;
   var _formkey=GlobalKey<FormState>();
   FirebaseAuth _auth=FirebaseAuth.instance;
+  XFile? _image;
 
   TextEditingController _name=new TextEditingController();
   TextEditingController _email=new TextEditingController();
   TextEditingController _password=new TextEditingController();
+  final ImagePicker _picker = ImagePicker();
+  _imgFromCamera() async {
+    var image = await _picker.pickImage(
+        source: ImageSource.camera, imageQuality: 50
+    );
+
+    setState(() {
+      _image = image;
+    });
+  }
+
+  _imgFromGallery() async {
+var image = await  _picker.pickImage(
+        source: ImageSource.gallery, imageQuality: 50
+    );
+
+    setState(() {
+      _image = image;
+    });
+  }
   SignMEUp(){
     if(_formkey.currentState!.validate()){
       Map<String, dynamic> data = {
@@ -109,13 +135,9 @@ class _SignUpState extends State<SignUp> {
 
 
               children: [
-                CircleAvatar(
-                  radius: 70,
-                  backgroundColor: Colors.white,
-                ),
-                Container(
-                  height: 10,
-                ),
+              Container(
+                height: 70,
+              ),
                 Form(
 
                   key:_formkey,
@@ -312,6 +334,36 @@ class _SignUpState extends State<SignUp> {
           ],
         );
       },
+    );
+  }
+  void _showPicker(context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return SafeArea(
+            child: Container(
+              child: new Wrap(
+                children: <Widget>[
+                  new ListTile(
+                      leading: new Icon(Icons.photo_library),
+                      title: new Text('Photo Library'),
+                      onTap: () {
+                        _imgFromGallery();
+                        Navigator.of(context).pop();
+                      }),
+                  new ListTile(
+                    leading: new Icon(Icons.photo_camera),
+                    title: new Text('Camera'),
+                    onTap: () {
+                      _imgFromCamera();
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+        }
     );
   }
 }

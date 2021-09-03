@@ -1,8 +1,12 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:my_chat_app/Views/Sigin.dart';
 import 'package:my_chat_app/authentication1/Constants.dart';
 import 'package:my_chat_app/authentication1/Sharedpref.dart';
+
+import 'About.dart';
+import 'ContactUS.dart';
 
 class MyDrawer extends StatelessWidget {
   @override
@@ -19,7 +23,7 @@ class MyDrawer extends StatelessWidget {
             children: <Widget>[
               UserAccountsDrawerHeader(
                 accountName: Text(Constants.MyName),
-                accountEmail: Text('guest@gmail.com'),
+                accountEmail: Text(Constants.MyEmail),
                 currentAccountPicture: GestureDetector(
                   child: CircleAvatar(
                     child: Icon(
@@ -43,52 +47,40 @@ class MyDrawer extends StatelessWidget {
                         Icons.person,
                         color: Colors.blue,
                       ))),
-              InkWell(
-                  onTap: () {
-                    // Navigator.push(context,
-                    //     MaterialPageRoute(builder: (context) => AboutUs()));
-                  },
-                  child: ListTile(
-                      title: Text('Setting'),
-                      leading: Icon(
-                        Icons.settings,
-                        color: Colors.blue,
-                      ))),
-              InkWell(
-                  onTap: () {
 
 
-                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>SignIn()));
-
-                    // Navigator.push(context,
-                    //     MaterialPageRoute(builder: (context) => AboutUs()));
-                  },
-                  child: ListTile(
-                      title: Text('Log Out'),
-                      leading: Icon(
-                        Icons.logout,
-                        color: Colors.blue,
-                      ))),
               InkWell(
                   onTap: () {
-                    // Navigator.push(context,
-                    //     MaterialPageRoute(builder: (context) => ContactUs()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => ContactUs()));
                   },
                   child: ListTile(
-                      title: Text('Contact Us'),
+                      title: Text('Contact US'),
                       leading: Icon(
                         Icons.contact_phone,
                         color: Colors.blue,
                       ))),
               InkWell(
                   onTap: () {
-                    // Navigator.push(context,
-                    //     MaterialPageRoute(builder: (context) => AboutUs()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => AboutUs()));
                   },
                   child: ListTile(
                       title: Text('About'),
                       leading: Icon(
                         Icons.help,
+                        color: Colors.blue,
+                      ))),
+              InkWell(
+                  onTap: () {
+                    SystemNavigator.pop();
+
+
+                  },
+                  child: ListTile(
+                      title: Text('Exit'),
+                      leading: Icon(
+                        Icons.exit_to_app,
                         color: Colors.blue,
                       ))),
             ],

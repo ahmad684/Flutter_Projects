@@ -24,16 +24,30 @@ class _ChatRoomState extends State<ChatRoom> {
           return snapshot.hasData?ListView.builder(
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context,index){
-                return ListTile(
-                  onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Conversation(snapshot.data!.docs[index]["chatRoomID"])));
-                  },
-                  leading: CircleAvatar(
-                    child: Center(child:
-                      Text(snapshot.data!.docs[index]["chatRoomID"][0]),),
-                  ),
+                return Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Column(
+                    children: [
+                      ListTile(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>Conversation(snapshot.data!.docs[index]["chatRoomID"])));
+                        },
+                        leading: CircleAvatar(
+                          radius: 30,
+                          child: Center(child:
+                            Text(snapshot.data!.docs[index]["chatRoomID"][0],style: TextStyle(fontSize: 25),),),
+                        ),
 
-                  title: Text(snapshot.data!.docs[index]["chatRoomID"].toString().replaceAll(" ", "").replaceAll(Constants.MyName, ""),style: TextStyle(color: Colors.white),),
+                        title: Text(snapshot.data!.docs[index]["chatRoomID"].toString().replaceAll(" ", "").replaceAll(Constants.MyName, ""),style: TextStyle(color: Colors.white,fontSize: 19),),
+
+
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(70.0,0,16,0),
+                        child: Divider(thickness: 2,color: Color(0xC1666161),),
+                      )
+                    ],
+                  ),
 
                 );
 
@@ -43,6 +57,9 @@ class _ChatRoomState extends State<ChatRoom> {
   }
   GEtUserInfo()async{
     Constants.MyName=await SharedPrefrencesData.GetMyName();
+    Constants.MyEmail=await SharedPrefrencesData.GetMyEmail();
+
+
 
     setState(() {
 

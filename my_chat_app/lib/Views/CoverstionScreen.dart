@@ -62,6 +62,7 @@ void ScrolDown(){
 
 
   }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -73,7 +74,7 @@ void ScrolDown(){
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarMain('Chat Room'),
+      appBar: AppBarMain(widget.chatRoomId.toString().replaceAll(" ", "").replaceAll(Constants.MyName, "")),
       body: Column(
         children: [
           Expanded(child: Stack(children:[chatMessageList()])),

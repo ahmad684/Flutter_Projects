@@ -36,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
       duration: 5000,
       imageSize: 400,
-      imageSrc: "asset/images/chat_ss.jpg",
+      imageSrc: "asset/images/chat_icon.png",
 
       textType: TextType.ColorizeAnimationText,
 

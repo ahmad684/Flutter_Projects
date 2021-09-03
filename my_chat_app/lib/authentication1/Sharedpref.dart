@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 class SharedPrefrencesData{
 static String LogedIn="IsLogedin";
@@ -12,7 +14,7 @@ static Future<bool>setLogedIn(bool isLogedIn)async{
   return await sharedPreferences.setString(myname, name);
 
 }static Future<bool>setMyEmail(String Email)async{
-  SharedPreferences sharedPreferences=await SharedPreferences.getInstance();
+  SharedPreferences sharedPreferences=await SharedPreferences.getInstance();  print(Email);
   return await sharedPreferences.setString(myemail, Email);
 
 }
@@ -27,8 +29,16 @@ static Future GetLogedIn()async{
 
 }static Future GetMyEmail()async{
   SharedPreferences sharedPreferences=await SharedPreferences.getInstance();
-  return sharedPreferences.getBool(myemail);
+
+  return sharedPreferences.getString(myemail);
+
 
 }
+static LogOut()async{
 
+  FirebaseAuth.instance.signOut();
+
+
+
+}
 }
